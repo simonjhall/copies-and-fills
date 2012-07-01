@@ -1,4 +1,12 @@
-/* void memcpy(void *dest,
+/*
+	Part of the "copies and fills" library by Simon Hall
+
+	The inner loop of the misaligned path is derived from the GNU libc ARM port.
+	The rest is my own work.
+
+	This code is licensed under the GNU Lesser General Public License version 2.1
+
+		void memcpy(void *dest,
                         const void *source,
                         size_t source);
 */

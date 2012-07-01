@@ -9,6 +9,9 @@ If you find a bug, please tell me!
 
 To use: define the environment variable, LD_PRELOAD=/full/path/to/libcofi_rpi.so, then run program.
 
+The inner loop of the misalignment path of memcpy is derived from the GNU libc ARM port. As a result "copies-and-fills" is licensed under the GNU Lesser General Public License version 2.1. See http://www.gnu.org/licenses/ for details.
+To see the original memcpy, browse it here: http://sourceware.org/git/?p=glibc-ports.git;a=blob;f=sysdeps/arm/memcpy.S;hb=HEAD
+
 Simon Hall
 
 ================
@@ -44,7 +47,7 @@ The code 4-byte aligns the destination with a byte writer, then 32-byte aligns i
 We then write two 2*16 bytes of data, then write words, then bytes.
 No preload of destination data seems to be required.
 
-Speeds of up to 1390 MB/s have been achieved.
+Speeds of up to 1390 MB/s have been achieved. This is ~7x faster than the libc version.
 ================
 
 01/07/2012, initial release

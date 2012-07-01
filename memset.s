@@ -1,4 +1,11 @@
-/* void *memset(void *dest, int c, size_t count); */
+/*
+	This is part of the "copies and fills" library by Simon Hall
+
+	This function is all my own work.
+	It is licensed under the GNU Lesser Public License version 2.1
+
+	void *memset(void *dest, int c, size_t count);
+*/
 .global memset
 .func memset
 memset:
