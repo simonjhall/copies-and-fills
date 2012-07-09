@@ -135,7 +135,6 @@ fast_loop:
 .if 0
 	ldmia r1!, {r4-r11}		/* original version */
 	subs r3, #32
-	pld [r0, #128]
 	stmia r0!, {r4-r11}
 	pld [r1, #128]
 	bne fast_loop
