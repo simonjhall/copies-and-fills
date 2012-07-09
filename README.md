@@ -1,5 +1,7 @@
 copies-and-fills
 
+SUMMARY
+
 Replacement memcpy and memset functionality for the Raspberry Pi with the intention of gaining greater performance.
 Coding with an understanding of single-issue is important.
 
@@ -14,7 +16,8 @@ To see the original memcpy, browse it here: http://sourceware.org/git/?p=glibc-p
 
 Simon Hall
 
-================
+NOTES
+
 memcpy:
 Can be found in memcpy.s.
 Compared to the generic libc memcpy, this one reaches performance parity at around ~150 bytes copies with any source/destination alignment and eventually gains 2-3x throughput, especially when the source buffer is uncached.
@@ -49,7 +52,7 @@ No preload of destination data seems to be required.
 
 Speeds of up to 1390 MB/s have been achieved. This is ~7x faster than the libc version.
 
-|||||||||||||||||||||||||||||||||||||||||||||||||||||||||\
+VERSION HISTORY
 
 09/07/2012, minor updates
 01/07/2012, initial release
