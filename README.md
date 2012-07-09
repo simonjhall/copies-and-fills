@@ -48,7 +48,9 @@ We then write two 2*16 bytes of data, then write words, then bytes.
 No preload of destination data seems to be required.
 
 Speeds of up to 1390 MB/s have been achieved. This is ~7x faster than the libc version.
-================
 
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||||\
+
+09/07/2012, minor updates
 01/07/2012, initial release
 
