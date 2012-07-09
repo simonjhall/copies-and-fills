@@ -8,13 +8,12 @@
 
 		void memcpy(void *dest,
                         const void *source,
-                        size_t source);
+                        size_t count);
 */
 
 .global memcpy
 .func memcpy
 memcpy:
-	/* I'd like bigger gaps between the condition code setting and testing... */
 	cmp r2, #0
 	pld [r1]
 	bxeq lr					/* get straight out on zero, NB: count is unsigned */
@@ -41,7 +40,7 @@ memcpy:
 
 	/* compute the dest pointer alignment */
 .if 0
-	and r3, r0, #3
+	and r3, r0, #3			/* slightly slower compared to conditional version below */
 
 	cmp r3, #3				/* three bytes misaligned, one to do */
 	beq head_1
@@ -96,7 +95,7 @@ align_up:
 
 	bne align_up
 .else
-	and r3, r0, #31
+	and r3, r0, #31			/* jump based on the amount of bytes to do - slower than loop above */
 	add pc, pc, r3
 	nop; nop
 
@@ -133,11 +132,22 @@ pre_fast_loop:
 
 	/* work through 32b at a time */
 fast_loop:
-	ldmia r1!, {r4-r11}
+.if 0
+	ldmia r1!, {r4-r11}		/* original version */
 	subs r3, #32
+	pld [r0, #128]
 	stmia r0!, {r4-r11}
 	pld [r1, #128]
 	bne fast_loop
+.else
+	ldmia r1!, {r4-r7}		/* slightly fast version suggested by tufty */
+	ldmia r1!, {r8-r11}
+	stmia r0!, {r4-r7}
+	pld [r1, #128]
+	subs r3, #32
+	stmia r0!, {r8-r11}
+	bne fast_loop
+.endif
 
 	/* handle the spare bytes, up to 32 of them */
 post_fast_loop:

@@ -50,7 +50,7 @@ skip_word_alignment:
 	and r3, r2, #31		/* small work */
 	bics r2, #31		/* bulk work */
 
-	push {r4-r10}
+	push {r4-r6}
 
 	bic r4, r3, #3		/* words of work to go */
 	beq bytes_and_words
@@ -59,19 +59,15 @@ skip_word_alignment:
 	mov r4, r1
 	mov r5, r1
 	mov r6, r1
-	mov r7, r1
-	mov r8, r1
-	mov r9, r1
-	mov r10, r1
 main_loop:
 	subs r2, #32
 
 	stmia r0!, {r1, r4, r5, r6}
-	stmia r0!, {r7, r8, r9, r10}
+	stmia r0!, {r1, r4, r5, r6}
 
 	bne main_loop
 	cmp r3, #0
-	popeq {r4-r10}
+	popeq {r4-r6}
 	popeq {r0, pc}
 	bic r4, r3, #3		/* redo this */
 
@@ -84,14 +80,14 @@ words:
 	bne words
 
 	ands r3, #3
-	popeq {r4-r10}
+	popeq {r4-r6}
 	popeq {r0, pc}
 bytes:
 	subs r3, #1
 	strb r1, [r0], #1
 	bne bytes
 
-	pop {r4-r10}
+	pop {r4-r6}
 	pop {r0, pc}
 stray_bytes:
 	cmp r2, #2
