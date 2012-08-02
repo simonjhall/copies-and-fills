@@ -331,7 +331,7 @@ post_misalignment_3_loop:
 	b full_out
 .endfunc
 
-//Raj: Added this to enable no exec stack
+/* Raj: Added this to enable no exec stack */
 #if defined(__linux__) && defined(__ELF__)
 .section .note.GNU-stack,"",%progbits
 #endif

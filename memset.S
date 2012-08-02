@@ -98,7 +98,7 @@ stray_bytes:
 
 	pop {r0, pc}
 .endfunc
-//Raj: Added this to enable no exec stack
+/* Raj: Added this to enable no exec stack */
 #if defined(__linux__) && defined(__ELF__)
 .section .note.GNU-stack,"",%progbits
 #endif
